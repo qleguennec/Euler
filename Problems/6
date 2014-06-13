@@ -1,0 +1,16 @@
+Problem 6
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+squaresDiff :: Integer -> Integer
+squaresDiff x = (square . sum $ [1..x]) - (sum $ map square $ [1..x])
+
+test :: Bool
+test = (==2640) $ squaresDiff 10
+
+res :: Integer
+res = squaresDiff 100

@@ -1,0 +1,13 @@
+Problem 7
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+test :: Bool
+test = (==13) $ primes!!5
+
+res :: Integer
+res = primes!!10000

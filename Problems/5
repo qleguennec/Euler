@@ -1,0 +1,18 @@
+Problem 5
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+
+equalsRange :: Integer -> [Div] -> Div
+equalsRange a range = head . filter 
+    (\xs -> (==[1..a]) 
+        $ take (fromIntegral a) . divs $ xs) 
+    $ range
+
+test :: Bool
+test =  (==2520) $ number . equalsRange 10 $ allDivs
+
+res :: Integer
+res = number . equalsRange 20 $ divList $ multiplesOf 2520

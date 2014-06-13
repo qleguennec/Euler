@@ -1,0 +1,13 @@
+Problem 3
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+test :: Bool
+test = (==29) $ last . divs . primesOf $ 13195
+
+res :: Integer
+res = last . divs $ primesOf 600851475143

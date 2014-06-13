@@ -1,0 +1,19 @@
+Problem 2
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+fib :: Integer -> Integer
+fib 1 = 1
+fib 2 = 2
+fib n = fib (n-1) + fib (n-2)
+
+test :: Bool
+test = (==89) $ fib 10
+
+res :: Integer
+res = sum $ takeWhile (<4000000) . filter (\x -> (==0) $ mod x 2) . map (fib)
+ $ [1..]

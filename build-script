@@ -1,0 +1,82 @@
+#! /usr/bin/bash
+
+PROJECT_NAME="euler"
+PROJECT_DIR="$PROJECT_ROOT/$PROJECT_NAME"
+PROBLEMS_DIR="Problems"
+CURRENT_PROBLEM="$2"
+LINE_TOWRITE="-- Problem $2\nmodule Problems.Current ("
+
+function test {
+    echo -e "Test du problème"
+    cd "$PROJECT_DIR/.cabal-sandbox/bin"
+    ./Euler test
+}
+
+function res {
+    cd "$PROJECT_DIR/.cabal-sandbox/bin"
+    echo -e "Résolution du problème"
+    ./Euler res
+}
+
+function copy_to_current {
+    cd "$PROJECT_DIR/$PROBLEMS_DIR"
+    touch Current.hs
+    sed "1s/.*/$LINE_TOWRITE/" $CURRENT_PROBLEM > Current.hs
+}
+
+function link {
+    cd "$PROJECT_ROOT/$PROJECT_NAME/$PROBLEMS_DIR"
+    if [ -f $CURRENT_PROBLEM ];
+    then 
+        copy_to_current
+    else
+        echo "$CURRENT_PROBLEM does not exist. Exiting"
+        exit 1
+    fi
+}
+
+function compile {
+    link
+
+     cd "$PROJECT_ROOT/$PROJECT_NAME"
+     cabal configure
+     cabal build
+     cabal install -j
+ } 
+
+function new {
+    cd "$PROJECT_ROOT/$PROJECT_NAME/$PROBLEMS_DIR"
+    touch $CURRENT_PROBLEM
+    cat << EOF >> "$CURRENT_PROBLEM"
+Problem $CURRENT_PROBLEM
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+test :: Bool
+test = 
+
+res :: Integer
+res =
+EOF
+    vim $CURRENT_PROBLEM
+}
+
+function edit {
+    vim "$PROJECT_ROOT/$PROJECT_NAME/$PROBLEMS_DIR/$CURRENT_PROBLEM"
+}
+
+case $1 in
+link) link;;
+compile) compile;;
+res) res;;
+copy) copy_to_current;;
+compile) compile;;
+new) new;;
+test) test;;
+edit) edit;;
+*) echo "Invalid option $1. Options are link, all, copy, compile, res, new, test, edit";;
+esac

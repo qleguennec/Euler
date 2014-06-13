@@ -1,0 +1,16 @@
+Problem 4
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+import Problems.Maths.Digits
+
+nDigitsDivs :: Integer -> Integer -> Bool
+nDigitsDivs x n = (/=0) . length $ filter (nDigits n) $ sdivsMerged x
+
+test :: Bool
+test = True
+
+res :: [Integer]
+res = filter (nDigitsDivs 2) $ palindromes

@@ -1,0 +1,16 @@
+Problem 1
+    test
+    , res
+) where
+
+import Problems.Maths.Divs
+
+mb35 :: Integer -> Integer
+mb35 below = sum $
+ multiplesOfBelow 3 below ++ multiplesOfBelow 5 below
+
+test :: Bool
+test = (==23) $ mb35 10
+
+res :: Integer
+res = mb35 1000
