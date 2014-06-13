@@ -10,6 +10,6 @@ This will create a new file containing a test and a res function.
 To compile problem
 ./build-script compile <Problem number>
 
-To test/resolve problem
-./build-script test <Problem number>
-./build-script res <Problem number>
+To test/resolve a compiled problem
+./build-script test
+./build-script res

@@ -1,0 +1,3 @@
+:set -iProblems/Maths
+:load Problems.Maths.Divs Problems.Maths.Digits
+:module Problems.Maths.Divs Problems.Maths.Digits
